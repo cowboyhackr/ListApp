@@ -35,6 +35,15 @@ class HomeScreen extends React.Component {
 }
 
 class ListScreen extends React.Component {
+  constructor(props){
+    super(props);
+        AsyncStorage.getItem('item1', (err, result) => {
+          Alert.alert(
+            'Fetch',
+            result
+          );
+    });
+  }
   static navigationOptions = {
     title: 'List',
   };
