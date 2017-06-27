@@ -7,7 +7,8 @@ import {
   FlatList,
   StyleSheet,
   TextInput,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -76,8 +77,11 @@ class AddScreen extends React.Component {
   saveItem(item){
     Alert.alert(
             'Alert Title',
-            'test'
-          )
+            item
+          );
+
+  AsyncStorage.setItem('item1', item);
+
   }
   render() {
     const { navigate } = this.props.navigation;
@@ -90,7 +94,7 @@ class AddScreen extends React.Component {
         />
         <TextInput
           style={{height: 40}}
-          placeholder="Type here to translate!"
+          placeholder="Type here to add new item!"
           onChangeText={(text) => this.setState({text})}
         />
         <Text style={{padding: 10, fontSize: 42}}>
