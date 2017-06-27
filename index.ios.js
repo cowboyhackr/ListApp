@@ -5,7 +5,8 @@ import {
   View,
   Button,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  TextInput
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -22,6 +23,10 @@ class HomeScreen extends React.Component {
           onPress={() => navigate('List')}
           title="List"
         />
+                <Button
+          onPress={() => navigate('Add')}
+          title="Add"
+        />
       </View>
       );
   }
@@ -35,7 +40,7 @@ class ListScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>Hello, LIST App!</Text>
+        <Text>Your List!</Text>
         <Button
           onPress={() => navigate('Home')}
           title="Home"
@@ -58,9 +63,44 @@ class ListScreen extends React.Component {
   }
 }
 
+class AddScreen extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
+  static navigationOptions = {
+    title: 'Add',
+  };
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <View style={{padding: 10}}>
+        <Text>Add a new item!</Text>
+        <Button
+          onPress={() => navigate('Home')}
+          title="Home"
+        />
+                <TextInput
+          style={{height: 40}}
+          placeholder="Type here to translate!"
+          onChangeText={(text) => this.setState({text})}
+        />
+        <Text style={{padding: 10, fontSize: 42}}>
+          {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
+        </Text>
+        <Button
+          onPress={() => navigate('Home')}
+          title="Home"
+        />
+      </View>
+      );
+  }
+}
+
 const ListApp = StackNavigator({
   Home: { screen: HomeScreen },
   List: { screen: ListScreen },
+  Add: {screen: AddScreen}
 });
 
 const styles = StyleSheet.create({
