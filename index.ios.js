@@ -6,7 +6,8 @@ import {
   Button,
   FlatList,
   StyleSheet,
-  TextInput
+  TextInput,
+  Alert
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -71,6 +72,13 @@ class AddScreen extends React.Component {
   static navigationOptions = {
     title: 'Add',
   };
+
+  saveItem(item){
+    Alert.alert(
+            'Alert Title',
+            'test'
+          )
+  }
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -80,7 +88,7 @@ class AddScreen extends React.Component {
           onPress={() => navigate('Home')}
           title="Home"
         />
-                <TextInput
+        <TextInput
           style={{height: 40}}
           placeholder="Type here to translate!"
           onChangeText={(text) => this.setState({text})}
@@ -89,8 +97,8 @@ class AddScreen extends React.Component {
           {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
         </Text>
         <Button
-          onPress={() => navigate('Home')}
-          title="Home"
+          onPress={() => this.saveItem(this.state.text)}
+          title="Add Item"
         />
       </View>
       );
