@@ -50,10 +50,7 @@ class ListScreen extends React.Component {
          let key = store[i][0];
          let value = store[i][1];
          this.list.push({key:value});
-            Alert.alert(
-            'Fetch',
-            key
-          );
+    
         });
       });
     });
@@ -96,7 +93,7 @@ class AddScreen extends React.Component {
             item
           );
 
-  AsyncStorage.setItem('item1', item);
+  AsyncStorage.setItem(item, item);
 
   }
   render() {
