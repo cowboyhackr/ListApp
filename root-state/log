@@ -30,3 +30,4 @@
 2017-06-22T21:10:55,296: [io /private/var/git/ListApp] getattrlist(/private/var/git/ListApp/react-native-packager-cache-Qq2HvQZ6Poyhe/S3DMVglVo+FLg=/97/ccb8943e909f8188c3cb1d58b1056a1a8c1b66TabViewPropTypes.js.meta.1323058578) failed: No such file or directory
 2017-06-22T21:40:52,026: [io /private/var/git/ListApp] readlink(/private/var/git/ListApp/ios/build/ModuleCache/23H8A59MTA9VG/Security-27ZMYP8CODFT0.pcm.lock) errno=2 tlen=-1
 2017-06-22T23:01:05,048: [io /private/var/git/ListApp] getattrlist(/private/var/git/ListApp/.watchman-cookie-mckennas-MacBook-Pro.local-93567-1-123) failed: No such file or directory
+2017-06-27T21:06:16,697: [io /private/var/git/ListApp] root /private/var/git/ListApp has had no activity in 432000 seconds and has no triggers or subscriptions, cancelling watch.  Set idle_reap_age_seconds in your .watchmanconfig to control this behavior

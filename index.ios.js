@@ -8,7 +8,8 @@ import {
   StyleSheet,
   TextInput,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  ListView
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -37,13 +38,27 @@ class HomeScreen extends React.Component {
 class ListScreen extends React.Component {
   constructor(props){
     super(props);
-        AsyncStorage.getItem('item1', (err, result) => {
-          Alert.alert(
+    this.list = [];
+    this.loadItems();
+  }
+
+  loadItems(){
+    AsyncStorage.getAllKeys((err, keys) => {
+      AsyncStorage.multiGet(keys, (err, stores) => {
+        stores.map((result, i, store) => {
+         // get at each store's key/value so you can work with it
+         let key = store[i][0];
+         let value = store[i][1];
+         this.list.push({key:value});
+            Alert.alert(
             'Fetch',
-            result
+            key
           );
+        });
+      });
     });
   }
+
   static navigationOptions = {
     title: 'List',
   };
@@ -57,18 +72,10 @@ class ListScreen extends React.Component {
           title="Home"
         />
                 <FlatList
-          data={[
-            {key: 'Devin'},
-            {key: 'Jackson'},
-            {key: 'James'},
-            {key: 'Joel'},
-            {key: 'John'},
-            {key: 'Jillian'},
-            {key: 'Jimmy'},
-            {key: 'Julie'},
-          ]}
+          data={this.list}
           renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
         />
+
       </View>
       );
   }
