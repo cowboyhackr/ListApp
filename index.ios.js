@@ -1,3 +1,7 @@
+import Swipeout from 'react-native-swipeout';
+
+
+
 import React from 'react';
 import {
   AppRegistry,
@@ -36,8 +40,11 @@ class HomeScreen extends React.Component {
 }
 
 class ListScreen extends React.Component {
+
+
   constructor(props){
     super(props);
+
     this.list = [];
     this.loadItems();
   }
@@ -56,12 +63,29 @@ class ListScreen extends React.Component {
     });
   }
 
+  completeTask(itemKey){
+
+
+ 
+  }
+
   static navigationOptions = {
     title: 'List',
   };
   render() {
     const { navigate } = this.props.navigation;
+    let swipeoutBtns = [
+      {
+        text: 'Complete',
+        onPress: function() {        Alert.alert(
+            'Task completed',
+            'test'
+          );}
+      },
+      {text: 'Delete', backgroundColor : '#ffff00'}
+    ]
     return (
+     
       <View>
         <Text>Your List!</Text>
         <Button
@@ -70,10 +94,13 @@ class ListScreen extends React.Component {
         />
                 <FlatList
           data={this.list}
-          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+          renderItem={({item}) =>  <Swipeout right={swipeoutBtns}><Text style={styles.item}>{item.key}</Text></Swipeout>}
         />
 
       </View>
+      
+
+
       );
   }
 }
