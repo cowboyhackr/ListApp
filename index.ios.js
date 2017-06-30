@@ -72,22 +72,7 @@ class ListScreen extends React.Component {
   };
   render() {
     const { navigate } = this.props.navigation;
-    let swipeoutBtns = [
-      {
-        text: 'Complete',
-        onPress : function (){
 
-          Alert.alert(
-            'Task completed',
-            this.key
-          );
- 
-        }
-      },
-      {text: 'Delete', backgroundColor : '#ff0000'},
-      {text: 'Delegate', backgroundColor : '#000000'}
-
-    ]
     return (
      
       <View>
@@ -99,20 +84,54 @@ class ListScreen extends React.Component {
         <FlatList
           data={this.list}
           renderItem={({item}) =>  
-          <Swipeout right={swipeoutBtns}>
-          
-            <TouchableOpacity onPress={() => Alert.alert(
-            'Row Clicked',
-              'yo')}>
-              <View  >
-                <Text style={styles.item}>{item.key}</Text>
-              </View>
-            </TouchableOpacity>
-          </Swipeout>}
+
+          <ListItem item={item}/>
+        }
+
         />
+          
       </View>
       );
   }
+}
+
+class ListItem extends React.Component {
+
+
+ completeTask(){
+
+ }
+
+ 
+  render(){
+
+      let swipeoutBtns = [
+        {
+          text: 'Complete',
+
+          onPress: () => { 
+
+                   Alert.alert(
+            'Task completed',
+            this.props.item.key
+              );
+
+           this.completeTask(this.props.item.key);
+                             },
+
+        },
+        {text: 'Delete', backgroundColor : '#ff0000'},
+        {text: 'Delegate', backgroundColor : '#000000'}
+      ];
+
+      return (
+          <Swipeout right={swipeoutBtns} id={this.props.item} >
+              <View  >
+                <Text style={styles.item}>{this.props.item.key}</Text>
+              </View>
+          </Swipeout>
+          );
+    }
 }
 
 class AddScreen extends React.Component {
@@ -130,7 +149,7 @@ class AddScreen extends React.Component {
             item
           );
 
-  AsyncStorage.setItem(item, item);
+    AsyncStorage.setItem(item, item);
 
   }
   render() {
