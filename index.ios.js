@@ -13,7 +13,9 @@ import {
   TextInput,
   Alert,
   AsyncStorage,
-  ListView
+  ListView,
+  TouchableWithoutFeedback,
+  TouchableOpacity
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -63,11 +65,7 @@ class ListScreen extends React.Component {
     });
   }
 
-  completeTask(itemKey){
 
-
- 
-  }
 
   static navigationOptions = {
     title: 'List',
@@ -77,30 +75,42 @@ class ListScreen extends React.Component {
     let swipeoutBtns = [
       {
         text: 'Complete',
-        onPress: function() {        Alert.alert(
+        onPress : function (){
+
+          Alert.alert(
             'Task completed',
-            'test'
-          );}
+            this.key
+          );
+ 
+        }
       },
-      {text: 'Delete', backgroundColor : '#ffff00'}
+      {text: 'Delete', backgroundColor : '#ff0000'},
+      {text: 'Delegate', backgroundColor : '#000000'}
+
     ]
     return (
      
       <View>
-        <Text>Your List!</Text>
+        <Text>Location 1 List!</Text>
         <Button
           onPress={() => navigate('Home')}
           title="Home"
         />
-                <FlatList
+        <FlatList
           data={this.list}
-          renderItem={({item}) =>  <Swipeout right={swipeoutBtns}><Text style={styles.item}>{item.key}</Text></Swipeout>}
+          renderItem={({item}) =>  
+          <Swipeout right={swipeoutBtns}>
+          
+            <TouchableOpacity onPress={() => Alert.alert(
+            'Row Clicked',
+              'yo')}>
+              <View  >
+                <Text style={styles.item}>{item.key}</Text>
+              </View>
+            </TouchableOpacity>
+          </Swipeout>}
         />
-
       </View>
-      
-
-
       );
   }
 }
